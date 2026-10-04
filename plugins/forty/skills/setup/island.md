@@ -1,20 +1,6 @@
-# The shell: island, side panel and presence, in the store's design
+# The shell: the AMS island, in the store's design
 
-A 40rty spacefront's shell has three pieces, all from `@40rty/ams-ui`, all
-themed by the same `--fourty-*` tokens mapped once from the store's design:
-
-| Piece | What it is | Use |
-|---|---|---|
-| `SpacefrontIsland` (`@40rty/ams-ui/island`) | floating composer at the bottom | always |
-| `SpacefrontThreadPanel` (`@40rty/ams-ui/thread-panel`) | chat side panel: the full conversation, docked right on desktop | when the canvas column leaves room (desktop ≥ 1024px); on mobile the island carries the conversation |
-| `SpacefrontPresence` (`@40rty/ams-ui/presence`) | the agent's presence band: what it's doing, what it understood (budget, occasion…), questions the visitor can answer | always — above the island (or atop the panel) |
-
-Import each with its stylesheet (`@40rty/ams-ui/<piece>.css`), map the tokens
-once in the store's CSS, and place them in the `/ask` route around
-`<SpacefrontCanvas />`. Prefer these components; hand-build only what a store's
-design genuinely can't express through the tokens.
-
-Every 40rty spacefront is recognisable by one thing above all: **the island** — a floating
+Every 40rty spacefront is recognisable by one thing: **the island** — a floating
 composer at the bottom of the screen, over the canvas the agent composes. Its
 anatomy is fixed; its look is the store's. Build it from the store's own design
 system, never from a new one.
