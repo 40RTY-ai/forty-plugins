@@ -16,7 +16,7 @@ npx forty connect
 npm run dev
 ```
 
-`forty create` writes a starter: a catalog with the types a store needs
+`forty create` writes a starter: blocks for the types a store needs
 (`productGrid`, `collectionList`, …), a component for each, a shell and a
 Tailwind build. `forty init` signs in and writes `forty.config.json` for the
 space (create it with `--create` if the developer named a new one).
@@ -36,10 +36,10 @@ npx forty dev
 ```
 
 The entry named by `bundle.entry` in `forty.config.json` must export `catalog`,
-`renderers` (one per catalog type, plus `agentText` and `turn`) and optionally
+`renderers` (one per block, plus `agentText` and `turn`) and optionally
 `shells`. Components import only `@40rty/ams-sdk` and React — no router, no cart
 route; cart, navigation and the conversation come from the SDK's hooks. Each
-catalog type needs a markdown manifest (`# <type>`, what it shows,
+block needs a markdown manifest (`# <type>`, what it shows,
 `## When to Use`, `## Don't Use When`).
 
 ## Make it the brand's (required)
