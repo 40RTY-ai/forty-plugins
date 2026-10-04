@@ -20,5 +20,5 @@ there applies — with the Hydrogen specifics replaced by the app's own:
 `<Spacefront>` is client-only — it fetches the engine in an effect — so in a
 server-rendering framework mount it from a client component.
 
-`hydrogen-example/` is still the best reference for the catalog, the manifests,
+`hydrogen-example/` is still the best reference for the palette, the manifests,
 the renderers and the shell; only the route and config wiring differ.

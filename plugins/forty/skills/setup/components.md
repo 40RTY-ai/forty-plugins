@@ -1,4 +1,8 @@
-# The components the agent composes
+# The components the agent composes — your palette
+
+The **palette** is the set of component types the agent may put on the page
+(in code: `catalog`, `app/forty/catalog.ts`). It is not the store's product
+catalog — that's the data the agent searches.
 
 A component is a **catalog type** (data, in `catalog.ts`), a **manifest** (prose
 for the agent, `catalogs/<type>.md`) and a **renderer** built from the store's
@@ -40,7 +44,7 @@ when you found the data or the component in the repo.
 - Props are few and each has `.describe()` written for the agent. Use `z`,
   `resolved`, `ProductSchema`, `CollectionSchema` from `@40rty/ams-sdk` only —
   `catalog.ts` imports nothing else.
-- The manifest's **first sentence** is all the agent sees in its catalog — the
+- The manifest's **first sentence** is all the agent sees of your palette — the
   rest is for people. Make that sentence say what it shows AND when to use it
   ("Two to four products side by side … — for "A or B?" questions."). Then
   `## When to Use` (the visitor's intent, in their words) and `## Don't Use When`
@@ -58,7 +62,7 @@ when you found the data or the component in the repo.
 
 ## Check
 
-A session keeps the catalog it was opened with until the page is reloaded —
+A session keeps the palette it was opened with until the page is reloaded —
 reload after `forty dev` or `forty publish`. Then ask the live route one question per type — "what do
 you sell", "show me X", "compare A and B", "which one should I get for Y",
 "what's your return policy" — and confirm each renders with the store's look.
