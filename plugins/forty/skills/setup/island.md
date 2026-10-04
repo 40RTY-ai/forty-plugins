@@ -9,8 +9,11 @@ themed by the same `--fourty-*` tokens mapped once from the store's design:
 | `SpacefrontThreadPanel` (`@40rty/ams-ui/thread-panel`) | chat side panel: the full conversation, docked right on desktop | when the canvas column leaves room (desktop ≥ 1024px); on mobile the island carries the conversation |
 | `SpacefrontPresence` (`@40rty/ams-ui/presence`) | the agent's presence band: what it's doing, what it understood (budget, occasion…), questions the visitor can answer | always — above the island (or atop the panel) |
 
-Import each with its stylesheet (`@40rty/ams-ui/<piece>.css`), map the tokens
-once in the store's CSS, and place them in the `/ask` route around
+Import each with its stylesheet (`@40rty/ams-ui/<piece>.css`), map the six shared
+tokens once in the store's CSS (`--fourty-surface`, `--fourty-fg`,
+`--fourty-accent`, `--fourty-accent-fg`, `--fourty-radius`,
+`--fourty-font-family`), pad the canvas by `var(--fourty-thread-panel-inset, 0px)`
+on the right, and place them in the `/ask` route around
 `<SpacefrontCanvas />`. Prefer these components; hand-build only what a store's
 design genuinely can't express through the tokens.
 
