@@ -1,6 +1,10 @@
-# Hosted by 40rty
+# Hosted package (no app)
 
-The developer ships a package of components; 40rty serves the page.
+For a store with **no app of its own**: the developer ships a package of
+components and 40rty serves the page. If the repo has a Hydrogen or React app,
+stop — integrate into that app and `forty deploy` it instead
+(`self-hosted-hydrogen.md`); a package can only approximate an existing store's
+design, while the app on 40rty is identical to it.
 
 ## New project
 

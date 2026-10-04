@@ -27,20 +27,24 @@ Also detect where the app deploys today: `npx --package @40rty/ams-cli forty dep
 Shopify is the only platform today. If the project is clearly another vertical
 or platform, say so and stop — do not force a Shopify integration onto it.
 
-## 2. Ask how to deploy
+## 2. Decide where it runs — usually no question
 
-Skip the question when the answer is forced (no app → hosted). Otherwise ask:
+| Found | Path |
+|---|---|
+| A Hydrogen (or other React) app | **Integrate into the app**, then `forty deploy` runs that same app on 40rty. The visitor sees the store's real components, header and cart — identical to the store. Do not ask. |
+| No app (empty folder, a theme-only store) | **Hosted package**: `forty create`, styled from the store's design. |
 
-- **Self-hosted** — the spacefront runs inside this app, with its own components and cart.
-- **Hosted by 40rty** — ship components as a package; 40rty serves the page.
+Only if the developer explicitly asks for a package instead of their app, use
+the hosted package for an app too, and tell them it will approximate their
+design, not reproduce it.
 
 ## 3. Follow the guide
 
-| Answer | Read and follow |
+| Path | Read and follow |
 |---|---|
-| Self-hosted, Hydrogen | `self-hosted-hydrogen.md` (worked example in `hydrogen-example/`) |
-| Self-hosted, any other React app | `self-hosted-react.md` |
-| Hosted by 40rty | `hosted.md` |
+| Hydrogen app | `self-hosted-hydrogen.md` (worked example in `hydrogen-example/`) — ends with `forty deploy` |
+| Any other React app | `self-hosted-react.md` |
+| No app — hosted package | `hosted.md` |
 
 Every guide builds the same two things from the store's own design system:
 the **shell** (the AMS island over the store's page — `island.md`) and the
