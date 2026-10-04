@@ -68,6 +68,20 @@ Before writing anything, establish:
   the spacefront route must not depend on them;
 - the Content-Security-Policy call in `app/entry.server.tsx`.
 
+**Get the store's environment first — don't ask for it.** If `.env` lacks
+`PUBLIC_STORE_DOMAIN` / `PUBLIC_STOREFRONT_API_TOKEN` (a fresh clone usually
+does), pull everything the store's Oxygen storefront already has:
+
+```
+npx shopify hydrogen link        # once: pick the store and storefront (browser sign-in to Shopify)
+npx shopify hydrogen env pull    # writes .env: store domain, Storefront token, checkout domain, SESSION_SECRET, and the app's other services (CMS keys, …)
+```
+
+That also fixes pages that need other services (a CMS homepage, reviews):
+with the real variables they render instead of failing. If the store is not on
+Oxygen, ask the developer for its `.env` — never invent values or point the app
+at a demo store.
+
 **A real store is required.** The agent searches the catalog through Shopify's
 global catalog, so it needs a real store's domain and Storefront API token.
 `mock.shop` and stores without a token cannot be searched — ask the developer
@@ -85,7 +99,11 @@ npm install -D @40rty/ams-cli
 ```
 
 Use the repo's package manager (`pnpm add`, `yarn add`) if it has a lockfile for
-one. If npm refuses with `EALLOWREMOTE`, the repo's `.npmrc` names a registry
+one. With pnpm, a fresh install may skip build scripts (`Ignored build scripts:
+esbuild, workerd …`); the Hydrogen dev server needs them — allow them in the
+repo's `package.json` (`"pnpm": {"onlyBuiltDependencies": ["esbuild", "workerd", "@tailwindcss/oxide"]}`,
+merged with any list already there) and reinstall, rather than running the
+interactive `pnpm approve-builds`. If npm refuses with `EALLOWREMOTE`, the repo's `.npmrc` names a registry
 host that differs from its lockfile; re-run with the lockfile's host, e.g.
 `--@shopify:registry=https://registry.npmjs.org`. Do not edit the lockfile.
 
