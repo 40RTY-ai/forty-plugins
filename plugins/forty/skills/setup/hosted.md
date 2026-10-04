@@ -38,13 +38,28 @@ route; cart, navigation and the conversation come from the SDK's hooks. Each
 catalog type needs a markdown manifest (`# <type>`, what it shows,
 `## When to Use`, `## Don't Use When`).
 
-## Make it the brand's
+## Make it the brand's (required)
 
-Restyle the starter to the brand's design system — from the developer's site,
-repo or design — fonts, colours, radius, spacing, rather than leaving the
-starter's look. The shell is the AMS island in that design (`island.md`); the
-components follow `components.md` (tier 1, then `comparisonTable` and
-`productDetail`).
+Never hand over the starter's neutral look — it is a placeholder, and a hosted
+space that does not look like the store reads as broken. Before the first
+preview link, restyle the package from the store's own design:
+
+- **Source:** the store's repo if you have it (Tailwind theme, CSS variables,
+  fonts in `public/`), else its live site — read its colours, fonts, radius,
+  button and input styles from the computed styles of its header, product card
+  and buttons.
+- **Tokens:** set `--color-ink`, `--color-paper`, `--color-accent` (and add any
+  second accent) in `src/styles.css`; add the store's fonts with `@font-face`
+  pointing at an origin that serves them with `access-control-allow-origin`
+  (check with `curl -I`), and map them in `tailwind.config.js`.
+- **Components:** match the store's card (image ratio, corners, title case),
+  price style, button (fill, radius, hover) and section headings in
+  `src/blocks.tsx`; give the header the store's logo treatment.
+- **Shell:** keep the island's anatomy (`island.md`), in those tokens.
+- **Then** follow `components.md` (tier 1, then `comparisonTable` and
+  `productDetail`).
+
+Compare the preview with the store's site side by side before handing it over.
 
 ## Check
 
