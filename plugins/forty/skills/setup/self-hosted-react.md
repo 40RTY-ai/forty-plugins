@@ -9,7 +9,13 @@ there applies — with the Hydrogen specifics replaced by the app's own:
 | route file convention (`app/routes/…`) | the framework's own (Next.js App Router: `app/<route>/page.tsx` rendering a `'use client'` component) |
 | CSP in `app/entry.server.tsx` | wherever the app sets its Content-Security-Policy (Next.js: `next.config` headers or middleware); skip if it sets none |
 | `FORTY_DEV_TOKEN` read in a loader | read it on the SERVER (a Server Component, `getServerSideProps`, a loader) and pass it as a prop — never in client code |
-| store binding in `.env` | `npx forty connect` reads `PUBLIC_STORE_DOMAIN` and `PUBLIC_STOREFRONT_API_TOKEN`; if the app names them differently, ask for the values rather than renaming the app's variables |
+| store binding in `.env` | `npx forty connect` reads `PUBLIC_STORE_DOMAIN` / `PUBLIC_STOREFRONT_API_TOKEN` and falls back to `SHOPIFY_STORE_DOMAIN` / `SHOPIFY_STOREFRONT_ACCESS_TOKEN` (Next.js Commerce's names) — never rename the app's own variables. `PUBLIC_CHECKOUT_DOMAIN` is only needed for Hydrogen's consent API |
+| `forty init` | detects the framework (Next.js, Remix, React Router, Vite) as self-hosted and writes `app/forty/...` + `route: "/ask"`; pass `--self-hosted` if it doesn't |
+| `package.json` `version` | `forty dev`/`publish` send it; add `"version": "0.1.0"` if the app has none |
+| pnpm ≥ 11 | pin `@40rty/ams-sdk@^<latest>` / `@40rty/ams-cli@^<latest>` (pnpm holds back releases younger than a day) and allow esbuild/sharp builds (`allowBuilds` in `pnpm-workspace.yaml`), or `pnpm dev` fails |
+| store components that read the URL (`useSearchParams`: variant pickers, add-to-cart, galleries) | wrap each renderer in `<Suspense>`; the picker writes `?size=` to the `/ask` URL, which works |
+| route files | Next.js App Router: `app/ask/page.tsx` (Server Component — reads `FORTY_DEV_TOKEN`) renders `app/ask/spacefront.tsx` (`'use client'` — mounts `<Spacefront>`) |
+| live link | `forty deploy` runs Hydrogen apps only today; for other apps finish on the dev server, `forty publish`, and `forty origin add <their production URL>` |
 
 `<Spacefront>` is client-only — it fetches the engine in an effect — so in a
 server-rendering framework mount it from a client component.

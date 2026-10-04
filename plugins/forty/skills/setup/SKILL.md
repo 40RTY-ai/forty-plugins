@@ -73,7 +73,7 @@ All three share these rules:
 Whatever the app's own deploy target, finish with it running on 40rty:
 
 ```
-npx forty deploy      # builds the app, serves it on 40rty, allows its origin
+npx forty deploy      # Hydrogen apps: builds the app, serves it on 40rty, allows its origin
 ```
 
 It prints `https://spacefront-<slug>…` — the developer can open and share it

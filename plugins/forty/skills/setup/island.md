@@ -15,7 +15,9 @@ Before writing the shell, find and write down (in a comment at the top of `Shell
 - the font family and the heading style;
 - its input style (the newsletter or search field is usually the best source);
 - anything pinned to the viewport (a sticky header or a header at the BOTTOM,
-  a cart drawer, a cookie bar) — the island must clear it.
+  a cart drawer, a cookie bar, a toaster such as sonner/react-hot-toast, a
+  framework dev overlay like Next.js's bottom-left button) — the island must
+  clear it or sit above it.
 
 Reuse the store's own button, input and text components when they exist. If it
 styles with classes only, reuse its classes. Never add a CSS file, a UI library,

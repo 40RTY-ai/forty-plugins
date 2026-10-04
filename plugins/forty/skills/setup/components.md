@@ -51,7 +51,10 @@ when you found the data or the component in the repo.
   with one small mapper per entity; tolerate missing fields (variants without
   `selectedOptions`, products without images) — never crash the canvas.
 - Every type gets an `examples` entry with placeholder gids.
-- Add-to-cart always goes through the store's own cart, never the SDK's.
+- Add-to-cart always goes through the store's own cart, never the SDK's. If
+  the store's product card has no add-to-cart (Next.js Commerce's tiles only
+  link to the product page), keep the card as it is in `productGrid` and use
+  the store's add-to-cart in `comparisonTable` / `productDetail`.
 
 ## Check
 
