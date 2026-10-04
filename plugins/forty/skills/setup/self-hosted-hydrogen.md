@@ -27,7 +27,7 @@ belong to that store.
   type needs something the store lacks (a comparison table, the island), compose
   it from the store's own pieces, colours and type. Do not add a CSS file or
   install a UI library.
-- **The palette file (`catalog.ts`) imports nothing but `@40rty/ams-sdk`.** It is published to the
+- **The catalog file imports nothing but `@40rty/ams-sdk`.** It is published to the
   platform as data; a React import in it breaks the publish.
 - **`z`, `resolved` and the entity schemas come from `@40rty/ams-sdk`**, never from
   the store's own `zod`.
@@ -82,7 +82,7 @@ with the real variables they render instead of failing. If the store is not on
 Oxygen, ask the developer for its `.env` — never invent values or point the app
 at a demo store.
 
-**A real store is required.** The agent searches products through Shopify's
+**A real store is required.** The agent searches the catalog through Shopify's
 global catalog, so it needs a real store's domain and Storefront API token.
 `mock.shop` and stores without a token cannot be searched — ask the developer
 for the token (Shopify admin › Headless or Hydrogen channel) rather than
@@ -123,7 +123,7 @@ to the developer — do not pick one. Then adjust `route` (the path the
 spacefront is served at) and `catalog` / `manifests` if the store differs from
 the defaults it wrote.
 
-### 4. Palette and manifests
+### 4. Catalog and manifests
 
 Follow `components.md`: tier 1 always (`productGrid`, `collectionList` by these
 exact names — the agent's commerce instructions are written against them), then
@@ -133,7 +133,7 @@ shows, `## When to Use`, `## Don't Use When`, written about the visitor's intent
 
 ### 5. Components
 
-One renderer per palette type, plus the two the platform requires because they
+One renderer per catalog type, plus the two the platform requires because they
 are how the agent speaks:
 
 - `agentText` — props `{ text?, parts? }`. Render `text` with `renderInline` from the sdk (it handles the agent's `**bold**`).
@@ -180,7 +180,7 @@ already sets `scriptSrc` itself, append the origin to its existing list.
 
 ```
 npx forty connect       # attach this store to the space; verifies the token and finds the shop id
-npx forty dev --once    # store the palette and manifests as a draft; write FORTY_DEV_TOKEN to .env
+npx forty dev --once    # store the catalog and manifests as a draft; write FORTY_DEV_TOKEN to .env
 npx forty doctor <dev-server-origin>
 ```
 
