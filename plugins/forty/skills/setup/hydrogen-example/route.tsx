@@ -5,7 +5,7 @@ import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
 
 import {fortyComponents} from '~/forty/components';
-import {Shell} from '~/forty/Shell';
+import {Shell, shellStyles} from '~/forty/Shell';
 
 import fortyConfig from '../../forty.config.json';
 
@@ -29,6 +29,9 @@ function useConsent(): 'granted' | 'pending' | 'withheld' {
   const analytics = String(customerPrivacy.currentVisitorConsent().analytics);
   return analytics === 'no' || analytics === 'false' ? 'withheld' : 'pending';
 }
+
+/** AMS UI's shell stylesheets, for this route only. */
+export const links = () => shellStyles.map((href) => ({rel: 'stylesheet', href}));
 
 /**
  * The developer's preview credential, written to `.env` by `forty dev`: with
