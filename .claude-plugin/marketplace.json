@@ -1,0 +1,12 @@
+{
+  "name": "40rty",
+  "metadata": { "description": "40rty — an agent composes your site for each visitor, out of your own components." },
+  "owner": { "name": "40rty", "url": "https://40rty.ai" },
+  "plugins": [
+    {
+      "name": "forty",
+      "source": "./plugins/forty",
+      "description": "Set up a 40rty spacefront in your repository: self-hosted in your own app, or hosted by 40rty."
+    }
+  ]
+}

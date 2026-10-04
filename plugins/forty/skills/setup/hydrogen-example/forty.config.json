@@ -1,0 +1,9 @@
+{
+  "apiUrl": "https://40rty-ams-production.up.railway.app",
+  "spaceSlug": "my-store",
+  "sourceId": "@my-store/storefront",
+  "label": "Hydrogen Demo Store",
+  "catalog": "app/forty/catalog.ts",
+  "manifests": "app/forty/catalogs",
+  "route": "/ask"
+}
