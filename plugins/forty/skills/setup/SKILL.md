@@ -10,6 +10,27 @@ which space, and how to deploy — and gets a **live link that works**: the
 agent answers, products render in the store's own components, add-to-cart
 fills the store's own cart.
 
+## 0. Work in a separate worktree
+
+Never change the developer's checkout. Before touching anything:
+
+```
+git worktree add ../<repo>-40rty -b forty/setup     # from the repo root
+cp .env ../<repo>-40rty/ 2>/dev/null                 # git-ignored: copy it (and any .env.local)
+cd ../<repo>-40rty && <package manager> install
+```
+
+Do all the work there. Their working tree, branch and uncommitted changes stay
+untouched, and their own dev server keeps running. If the app lives in a
+subfolder (a monorepo), the worktree is still of the repo root — work in the same
+subfolder inside it.
+
+At the end, commit on `forty/setup` (one commit, a clear message, never
+`.env`/`FORTY_DEV_TOKEN`), and tell the developer how to take it: open a PR from
+the branch, or `git merge forty/setup`. Don't merge or push it yourself unless
+they ask. Not a git repository? Copy the folder to `../<name>-40rty`, work in
+the copy, and say so.
+
 ## 1. Detect
 
 Read `package.json` and the tree, then state in one line what you found:
@@ -83,7 +104,8 @@ answers it too. Do not change their own deploy setup.
 
 ## 5. Finish
 
-Report in a few lines: the live link, the route, the components published and
+Report in a few lines: where the work is (the `forty/setup` branch and worktree
+path, and how to merge it), the live link, the route, the components published and
 which store components draw them, what you assumed (the consent source above
 all), and the commands they use from here — `npx forty dev` (every save updates
 their preview), `npx forty publish` (visitors see it), `npx forty deploy`
