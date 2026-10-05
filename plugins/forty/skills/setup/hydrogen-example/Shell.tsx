@@ -6,11 +6,11 @@ import islandCss from '@40rty/ams-ui/island.css?url';
 import presenceCss from '@40rty/ams-ui/presence.css?url';
 import threadPanelCss from '@40rty/ams-ui/thread-panel.css?url';
 
-/** The shell's stylesheets, linked by the `/ask` route. */
+/** The shell's stylesheets, linked by `forty/route.tsx`. */
 export const shellStyles = [islandCss, presenceCss, threadPanelCss];
 
 /*
- * The `/ask` page: the canvas the agent composes onto, and AMS UI's shell —
+ * The agentic page: the canvas the agent composes onto, and AMS UI's shell —
  * the island, the conversation panel and the agent's presence — in this
  * store's design: map the six shared tokens in the store's CSS, e.g.
  *

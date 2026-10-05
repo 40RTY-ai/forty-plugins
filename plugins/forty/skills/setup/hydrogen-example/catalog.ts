@@ -2,7 +2,7 @@ import {CollectionSchema, ProductSchema, resolved, z} from '@40rty/ams-sdk';
 import type {HostComponents} from '@40rty/ams-sdk';
 
 /**
- * What the agent may compose on the `/ask` canvas. Data only — `forty publish`
+ * What the agent may compose on the agentic page's canvas. Data only — `forty publish`
  * sends this file to the platform, so it must import nothing but `@40rty/ams-sdk`.
  * Each type is drawn in `./components.tsx` and described in `./catalogs/`.
  */

@@ -108,7 +108,7 @@ answers it too. Do not change their own deploy setup.
 ## 5. Finish
 
 Report in a few lines: where the work is (the `forty/setup` branch and worktree
-path, and how to merge it), the live link, the route, the components published and
+path, and how to merge it), the live link, the components published and
 which store components draw them, what you assumed (the consent source above
 all), and the commands they use from here — `npx forty dev` (every save updates
 their preview), `npx forty publish` (visitors see it), `npx forty deploy`

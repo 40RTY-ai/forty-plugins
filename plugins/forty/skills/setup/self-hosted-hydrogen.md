@@ -1,4 +1,4 @@
-# Integrate 40rty into a Hydrogen storefront
+# Integrate AMS into a Hydrogen app
 
 The agentic webpage is a page where an agent composes a layout for each visitor. In a
 store that hosts itself, **everything the visitor sees is the store's own**: the
@@ -13,8 +13,14 @@ You are adding five things to the store's repo and publishing one:
 | `app/forty/catalog.ts` | what the agent may compose — data only |
 | `app/forty/catalogs/<type>.md` | each type described to the agent |
 | `app/forty/components.tsx` | the store's components drawing each type |
-| `app/forty/Shell.tsx` | the page: the canvas, and the AMS island in the store's design (`island.md`) |
-| a route | mounts `<Spacefront>` with the above |
+| `app/forty/Shell.tsx` | the page: the canvas, and the AMS shell in the store's design (`island.md`) |
+| `app/forty/route.tsx` | the agentic page's route module: mounts `<Spacefront>` with the above |
+| `app/forty/routes.ts` + one line in `app/routes.ts` | with `FORTY_AGENTIC=1` the app's `/` renders `forty/route.tsx` |
+
+**The agentic webpage is never a route in the store.** It is its own deployment
+of the same app, built with `FORTY_AGENTIC=1`, where `/` is the agentic page and
+every other route (products, collections, cart) stays the store's own. Without
+the flag the store builds exactly as before — no link, no new URL in the store.
 
 `hydrogen-example/` holds a complete working integration (Shopify's `hydrogen-demo-store`).
 Read it first; adapt it, do not paste it — the component and class names in it
@@ -119,9 +125,8 @@ npx forty init [--space <slug> | --create <slug>] [--source @<org>/storefront]
 It signs the developer in if needed and writes the file for the space. Pass
 `--space` when the developer named an existing space and `--create` when they
 named one that does not exist yet; otherwise it asks, and you pass the question
-to the developer — do not pick one. Then adjust `route` (the path the
-agentic webpage is served at) and `catalog` / `manifests` if the store differs from
-the defaults it wrote.
+to the developer — do not pick one. Then adjust `catalog` / `manifests` if the store differs from the defaults it
+wrote.
 
 ### 4. Blocks and manifests
 
@@ -145,14 +150,23 @@ fragment shape, so write one small mapper per entity and pass the result to the
 store's component unchanged. Variants may arrive without `selectedOptions`; a
 store form that reads `options[0]` must still get one (key it by the variant title).
 
-### 6. Shell and route
+### 6. Shell and agentic page
 
-Build the shell as `island.md` describes: the AMS island in the store's design,
-over `<SpacefrontCanvas />`. Write its copy for this store.
+Build the shell as `island.md` describes, over `<SpacefrontCanvas />`. Write its
+copy for this store.
 
-Add the route following the store's convention, rendering `<Spacefront>` inside
-the store's normal page layout so its header, footer and cart stay. Add one link
-to it where the store's navigation lives.
+Put the page in `app/forty/route.tsx` (`hydrogen-example/route.tsx`): a route
+module rendering `<Spacefront>` inside the store's normal layout, so its header,
+footer and cart stay. Copy `hydrogen-example/routes.ts` to `app/forty/routes.ts`
+unchanged and wrap the store's route list in `app/routes.ts`:
+
+```ts
+import {agenticRoutes} from './forty/routes';
+export default hydrogenRoutes(agenticRoutes([...(await flatRoutes())])) satisfies RouteConfig;
+```
+
+Do not add a route, a nav link or a new URL to the store. Check both builds:
+`FORTY_AGENTIC=1` → `/` is the agentic page; without it → the store's own home.
 
 `consent` must reflect the store's real consent state. A Hydrogen store with
 `Analytics.Provider` exposes it through `useAnalytics().customerPrivacy` (see
@@ -161,7 +175,7 @@ if you find none, pass `"granted"` and say so in your summary.
 
 The developer previews their own draft, and a space that is not live yet is
 locked, so `<Spacefront>` takes the developer's credential: pass `token`, read on
-the SERVER from the `FORTY_DEV_TOKEN` environment variable (a route loader) and
+the SERVER from the `FORTY_DEV_TOKEN` environment variable (the route module's loader) and
 handed to the component. Never hardcode it and never read it in client code. It
 is absent in production, where it stays `undefined`.
 
@@ -190,9 +204,9 @@ fix; fix the files and run it again. A `404` means the space named in
 `forty.config.json` is not one of the signed-in organization's — stop and say
 so; do not try another slug.
 
-`forty doctor` needs the store's dev server running; start it, run the check, and
-stop it again. It is the definition of done — do not report success on a failing
-check. If you have browser tools, also open the route, ask one question per
+`forty doctor` needs the dev server running with `FORTY_AGENTIC=1` (so `/` is the
+agentic page); start it, run the check, and stop it again. It is the definition of done — do not report success on a failing
+check. If you have browser tools, also open `/` on that dev server, ask one question per
 component type (`components.md` › Check), and confirm each renders with the
 store's look and that add-to-cart updates the store's cart.
 
@@ -203,18 +217,19 @@ say so in your summary rather than committing it.
 
 ```
 npx forty publish       # the release: the space's visitors see these components
-npx forty deploy        # run this app on 40rty and allow its origin — prints the live link
+npx forty deploy        # build the agentic deployment and serve it on AMS — prints the live link
 npx forty doctor <live-link>
 ```
 
-`forty deploy` builds the app and serves it on 40rty regardless of where the
-store deploys itself — the developer gets a working link now. It ships the
-store's public variables from `.env`, never `FORTY_DEV_TOKEN`. When the store's
-own production site (Oxygen, Vercel, …) serves the route, run
-`npx forty origin add <its origin>` so the space answers it too.
+`forty deploy` builds the agentic deployment (`FORTY_AGENTIC=1`) and serves it
+on AMS — the developer gets a working link now, and the store's own deployment
+is untouched. It ships the store's public variables from `.env`, never
+`FORTY_DEV_TOKEN`. To self-host instead, deploy a second environment of the app
+built with `FORTY_AGENTIC=1` (e.g. another Oxygen environment or Vercel project)
+and run `npx forty origin add <its origin>`.
 
 ## Finish
 
-Report: the live link, the route, the types published and which store components
+Report: the live link, the types published and which store components
 draw them, where the store itself deploys, and anything you assumed (the consent
 source above all).

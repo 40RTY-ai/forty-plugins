@@ -13,7 +13,7 @@ Import each with its stylesheet (`@40rty/ams-ui/<piece>.css`), map the six share
 tokens once in the store's CSS (`--fourty-surface`, `--fourty-fg`,
 `--fourty-accent`, `--fourty-accent-fg`, `--fourty-radius`,
 `--fourty-font-family`), pad the canvas by `var(--fourty-thread-panel-inset, 0px)`
-on the right, and place them in the `/ask` route around
+on the right, and place them in the agentic page (`app/forty/route.tsx`) around
 `<SpacefrontCanvas />`. Prefer these components; hand-build only what a store's
 design genuinely can't express through the tokens.
 
@@ -94,7 +94,7 @@ or colours the store does not use.
 
 ## Check it
 
-Open the route on a phone width (390px) and a desktop width: the island never
+Open `/` of the `FORTY_AGENTIC=1` dev server on a phone width (390px) and a desktop width: the island never
 covers the store's own sticky bars, the last canvas row is reachable, the input
 takes focus without triggering the store's keyboard shortcuts (stop propagation
 of `keydown` from the field if the store binds single keys), and it reads as the
