@@ -1,9 +1,12 @@
 ---
 name: setup
-description: Set up a 40rty spacefront in this repository — self-hosted inside the store's own app, or hosted by 40rty — and end with a live link that works.
+description: Set up an AMS agentic webpage in this repository — self-hosted inside the app, or hosted by AMS — and end with a live link that works.
 ---
 
-# Set up 40rty
+# Set up AMS
+
+Full reference (props, tokens, CLI flags, every `forty doctor` check): fetch
+https://40rty-docs.vercel.app/llms-full.txt when a detail isn't in these files.
 
 One command, the whole setup. The developer answers at most two questions —
 which space, and how to deploy — and gets a **live link that works**: the

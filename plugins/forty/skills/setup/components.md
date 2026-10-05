@@ -9,7 +9,7 @@ for the agent, `catalogs/<type>.md`) and a **renderer** built from the store's
 own components. The agent only ever picks types and fills props; `resolved()`
 props are filled with real store entities at render time.
 
-Build in this order. Each tier makes the spacefront materially more useful; ship
+Build in this order. Each tier makes the agentic webpage materially more useful; ship
 tier 1 always, then propose tier 2 to the developer with one line each and build
 what they accept (default: build `comparisonTable` and `productDetail` — they
 need nothing but the product data the store already has).

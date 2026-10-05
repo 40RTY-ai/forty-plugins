@@ -1,6 +1,6 @@
 # The shell: island, side panel and presence, in the store's design
 
-A 40rty spacefront's shell has three pieces, all from `@40rty/ams-ui`, all
+An agentic webpage's shell has three pieces, all from `@40rty/ams-ui`, all
 themed by the same `--fourty-*` tokens mapped once from the store's design:
 
 | Piece | What it is | Use |
@@ -17,7 +17,7 @@ on the right, and place them in the `/ask` route around
 `<SpacefrontCanvas />`. Prefer these components; hand-build only what a store's
 design genuinely can't express through the tokens.
 
-Every 40rty spacefront is recognisable by one thing above all: **the island** — a floating
+Every agentic webpage is recognisable by one thing above all: **the island** — a floating
 composer at the bottom of the screen, over the canvas the agent composes. Its
 anatomy is fixed; its look is the store's. Build it from the store's own design
 system, never from a new one.
@@ -90,7 +90,7 @@ or colours the store does not use.
   product components add to it through the store's own add-to-cart.
 - Hooks: `useFourtySession()` (`sendMessage`, `isRunning`, `error`,
   `suggestions`), `useComposerDraft()`, `useThreadRows()`, `useComposerChipSelect()`,
-  `useGoHome()` for the store logo inside the spacefront.
+  `useGoHome()` for the store logo inside the agentic webpage.
 
 ## Check it
 

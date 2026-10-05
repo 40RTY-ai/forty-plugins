@@ -1,6 +1,6 @@
 # Integrate 40rty into a Hydrogen storefront
 
-The spacefront is a page where an agent composes a layout for each visitor. In a
+The agentic webpage is a page where an agent composes a layout for each visitor. In a
 store that hosts itself, **everything the visitor sees is the store's own**: the
 agent decides *what* to show, the store's components decide how it looks. 40rty
 contributes an engine (loaded at runtime from the 40rty API) and nothing visual.
@@ -60,12 +60,12 @@ Before writing anything, establish:
 - its **design system** — colours, type, radius, buttons, inputs, what is pinned
   to the viewport (`island.md` says what to collect);
 - keyboard shortcuts the store binds to single keys (a field inside the
-  spacefront must not trigger them);
+  agentic webpage must not trigger them);
 - the store binding in `.env`: `PUBLIC_STORE_DOMAIN`, `PUBLIC_STOREFRONT_API_TOKEN`,
   `PUBLIC_CHECKOUT_DOMAIN`, and `SHOP_ID` if present;
 - other services the app needs at runtime (a CMS like Sanity, reviews) and
   whether their keys are in `.env` — pages that need a missing service may fail;
-  the spacefront route must not depend on them;
+  the agentic webpage route must not depend on them;
 - the Content-Security-Policy call in `app/entry.server.tsx`.
 
 **Get the store's environment first — don't ask for it.** If `.env` lacks
@@ -88,7 +88,7 @@ global catalog, so it needs a real store's domain and Storefront API token.
 for the token (Shopify admin › Headless or Hydrogen channel) rather than
 continuing without one. If `PUBLIC_CHECKOUT_DOMAIN` is missing, set it (the
 store's checkout domain, or its `*.myshopify.com` domain): without it Hydrogen's
-privacy API never loads, consent stays pending, and the spacefront ignores
+privacy API never loads, consent stays pending, and the agentic webpage ignores
 every message.
 
 ### 2. Install
@@ -120,7 +120,7 @@ It signs the developer in if needed and writes the file for the space. Pass
 `--space` when the developer named an existing space and `--create` when they
 named one that does not exist yet; otherwise it asks, and you pass the question
 to the developer — do not pick one. Then adjust `route` (the path the
-spacefront is served at) and `catalog` / `manifests` if the store differs from
+agentic webpage is served at) and `catalog` / `manifests` if the store differs from
 the defaults it wrote.
 
 ### 4. Blocks and manifests
