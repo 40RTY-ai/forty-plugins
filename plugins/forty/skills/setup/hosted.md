@@ -59,9 +59,14 @@ preview link, restyle the package from the store's own design:
 - **Components:** match the store's card (image ratio, corners, title case),
   price style, button (fill, radius, hover) and section headings in
   `src/blocks.tsx`; give the header the store's logo treatment.
-- **Shell:** keep the island's anatomy (`island.md`), in those tokens.
-- **Then** follow `components.md` (tier 1, then `comparisonTable` and
-  `productDetail`).
+- **Shell and blocks — concierge (default):** replace the starter's island
+  shell with the conversation page and add the conversation blocks, a store
+  tile, `brand.ts` and `prompts/composition.md` as `concierge.md` describes;
+  set the `--fourty-convo-*` tokens from the same reading. Keep tier 1 from
+  `components.md` in the store's look.
+- **Regular (only on request):** keep the island's anatomy (`island.md`) in
+  those tokens, then follow `components.md` (tier 1, then `comparisonTable`
+  and `productDetail`).
 
 Compare the preview with the store's site side by side before handing it over.
 

@@ -71,9 +71,16 @@ design, not reproduce it.
 | No app — hosted package | `hosted.md` |
 
 Every guide builds the same two things from the store's own design system:
-the **shell** (the AMS island over the store's page — `island.md`) and the
-**components** the agent composes (`components.md`, starting with the basics
-and comparison). Read both before writing UI.
+the **shell** and the **components** the agent composes. Both depend on the
+mode — **concierge by default**:
+
+| Mode | When | Read |
+|---|---|---|
+| **Concierge** | always, unless the developer asks for regular | `concierge.md` — each answer is its own page (headline + a bento of `verdict`, `shortlist`, `tradeoff`, `guidedPick`, `paths`… from `@40rty/ams-ui/conversation`) around the store's cards, plus tier 1 from `components.md` |
+| Regular | only when the developer asks for it ("regular", "island", "classic") | `island.md` (the island over the store's page) + `components.md` (tier 1, then tier 2) |
+
+Do not ask which mode — build concierge and say so in one line. Read the mode's
+files before writing UI.
 
 All three share these rules:
 
@@ -107,7 +114,7 @@ answers it too. Do not change their own deploy setup.
 
 ## 5. Finish
 
-Report in a few lines: where the work is (the `forty/setup` branch and worktree
+Report in a few lines: the mode (concierge, or regular if asked), where the work is (the `forty/setup` branch and worktree
 path, and how to merge it), the live link, the components published and
 which store components draw them, what you assumed (the consent source above
 all), and the commands they use from here — `npx forty dev` (every save updates

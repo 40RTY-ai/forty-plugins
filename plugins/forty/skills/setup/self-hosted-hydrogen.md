@@ -13,7 +13,7 @@ You are adding five things to the store's repo and publishing one:
 | `app/forty/catalog.ts` | what the agent may compose — data only |
 | `app/forty/catalogs/<type>.md` | each type described to the agent |
 | `app/forty/components.tsx` | the store's components drawing each type |
-| `app/forty/Shell.tsx` | the page: the canvas, and the AMS shell in the store's design (`island.md`) |
+| `app/forty/Shell.tsx` | the page: the canvas, and the AMS shell in the store's design (`concierge.md` by default, `island.md` for regular) |
 | `app/forty/route.tsx` | the agentic page's route module: mounts `<Spacefront>` with the above |
 | `app/forty/routes.ts` + one line in `app/routes.ts` | with `FORTY_AGENTIC=1` the app's `/` renders `forty/route.tsx` |
 
@@ -152,8 +152,11 @@ store form that reads `options[0]` must still get one (key it by the variant tit
 
 ### 6. Shell and agentic page
 
-Build the shell as `island.md` describes, over `<SpacefrontCanvas />`. Write its
-copy for this store.
+Build the shell in concierge mode as `concierge.md` describes (the
+conversation page, the conversation blocks drawn with the store's product card,
+`brand.ts` + `prompts/composition.md`) — or, only if the developer asked for
+regular, as `island.md` describes, over `<SpacefrontCanvas />`. Write its copy
+for this store.
 
 Put the page in `app/forty/route.tsx` (`hydrogen-example/route.tsx`): a route
 module rendering `<Spacefront>` inside the store's normal layout, so its header,
