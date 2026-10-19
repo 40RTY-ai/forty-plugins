@@ -1,15 +1,18 @@
-# Concierge mode (the default)
+# Conversational UI (the default)
 
-Every agentic webpage is built in **concierge mode** unless the developer asks
-for the regular island page. Concierge answers like a shop-floor expert: each
+Every agentic webpage is built as a **conversational UI** unless the developer
+asks for classic. It answers like a shop-floor expert: each
 question gets its own page — the visitor's words, what the agent knows, the
 answer as a headline, then a bento of reasoning blocks (a verdict, a shortlist,
 a trade-off, a guided pick, next paths) around the store's own product cards.
 
 | Mode | Shell | Blocks |
 |---|---|---|
-| **concierge** (default) | conversation page: `ConversationCanvas` + `PageComposer` in `ShellScaffold` | tier 1 + the shared conversation blocks |
-| regular (only on request) | the island over the canvas (`island.md`) | tier 1 + tier 2 (`components.md`) |
+| **conversational UI** (default) | conversation page: `ConversationCanvas` + `PageComposer` in `ShellScaffold` | tier 1 + the shared conversation blocks |
+| classic (only on request) | the store's page reshaped, with the chat side panel (`classic.md`) | tier 1 + tier 2 (`components.md`) |
+
+A hosted package from `forty create` already starts as this; the steps below are
+what it contains, and what a self-hosted app adds by hand.
 
 Everything below comes from `@40rty/ams-ui/conversation` and `@40rty/ams-sdk`.
 Never copy a brand package's blocks or shell — the kit is the source.
@@ -90,7 +93,7 @@ export const turnAsk: TurnAskPlacement = 'shell';
 ## 4. Look — the store's tokens
 
 `conversation.css` reads `--fourty-convo-*`. Set them once from the store's
-design (the same reading `island.md` describes):
+design (the same reading `classic.md` describes):
 
 ```css
 :root {
@@ -147,7 +150,7 @@ Answer with a page, not one block: 4-6 blocks that each add something; every tur
 ```
 
 `forty dev` sends the brand and prompts with every draft, so the preview link
-answers in concierge mode right away.
+answers as a conversational UI right away.
 
 ## Check
 

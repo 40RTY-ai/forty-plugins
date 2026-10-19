@@ -13,7 +13,29 @@ which space, and how to deploy — and gets a **live link that works**: the
 agent answers, products render in the store's own components, add-to-cart
 fills the store's own cart.
 
-## 0. Work in a separate worktree
+## 0. Who is this for
+
+The CLI is `@40rty/ams-cli` **0.5.8 or later** (`--from`, `whoami`, the
+conversational starter). First run:
+
+```
+npx --package @40rty/ams-cli@latest forty whoami      # signs in first if needed: `forty login` opens the browser
+```
+
+If it prints **`staff: yes`**, this is a 40rty demo, and it never lives in a
+folder of its own or ships from this machine:
+
+- Work in the `40RTY-ai/brands` repo, on a branch: `packages/<space>`, on the
+  shape of `packages/spanx` (conversational UI, Tailwind v4 through
+  `../../tailwind.css`, `forty.config.json` with `brand`, `prompts`, `mark`).
+  Do not run `forty create` there.
+- Preview with `pnpm exec forty dev --once` from the package. Release by opening
+  a PR and merging it: the brands CI publishes. Never `forty publish` from a laptop.
+- Skip the worktree in step 0.1 and the deploy in step 4.
+
+`staff: no` (an agency or a store): carry on below.
+
+## 0.1 Work in a separate worktree
 
 Never change the developer's checkout. Before touching anything:
 
@@ -72,15 +94,20 @@ design, not reproduce it.
 
 Every guide builds the same two things from the store's own design system:
 the **shell** and the **components** the agent composes. Both depend on the
-mode — **concierge by default**:
+mode — **conversational UI by default**:
 
 | Mode | When | Read |
 |---|---|---|
-| **Concierge** | always, unless the developer asks for regular | `concierge.md` — each answer is its own page (headline + a bento of `verdict`, `shortlist`, `tradeoff`, `guidedPick`, `paths`… from `@40rty/ams-ui/conversation`) around the store's cards, plus tier 1 from `components.md` |
-| Regular | only when the developer asks for it ("regular", "island", "classic") | `island.md` (the island over the store's page) + `components.md` (tier 1, then tier 2) |
+| **Conversational UI** | always, unless the developer asks for classic | `conversational.md` — each question opens its own page (headline + a page of `verdict`, `shortlist`, `tradeoff`, `guidedPick`, `paths`… from `@40rty/ams-ui/conversation`) around the store's cards, plus tier 1 from `components.md` |
+| Classic | only when the developer asks for it ("classic", "side panel", "chat beside the page") | `classic.md` (the store's page, reshaped by the agent, with the chat side panel) + `components.md` (tier 1, then tier 2) |
 
-Do not ask which mode — build concierge and say so in one line. Read the mode's
-files before writing UI.
+The **island** is the floating prompt box; both modes have one. It is a
+component, never a mode — do not call either mode "island".
+
+Do not ask which mode — build conversational UI and say so in one line. Read the
+mode's file before writing UI. In both, the shell owns the scroller
+(`ShellScaffold scrollRef={useScrollContainerRef()}`): the page around a hosted
+shell does not scroll, so a `min-h-screen` shell cannot scroll at all.
 
 All three share these rules:
 
@@ -95,6 +122,15 @@ All three share these rules:
   named one, pass `--space <slug>`; if it does not exist, `--create <slug>`
   creates it in their organization. Otherwise pass the question to the
   developer — never pick one yourself.
+- **The store binding is public.** `npx forty connect --from <the store's live URL>`
+  reads the store's `*.myshopify.com` domain and its Storefront token off the
+  page and checks them. A Storefront token is public by design (every storefront
+  ships it to every visitor's browser); reading it is not credential access and
+  needs no one's admin. Never search the repo or the machine for tokens.
+  If `--from` reports a bot wall (`403`, Cloudflare "Just a moment…"), ask the
+  developer to open the store in their own browser, save the page (⌘S, "Webpage,
+  HTML only") and give you the file: `npx forty connect --from <file>`. A token
+  already in `.env` (`PUBLIC_STOREFRONT_API_TOKEN`) is used as is.
 - A `404` from the CLI means the space is not the signed-in organization's — stop and say so.
 - `npx forty doctor <url>` is the definition of done — run it against the dev
   server AND the live link. Never report success on a failing check.
@@ -114,7 +150,7 @@ answers it too. Do not change their own deploy setup.
 
 ## 5. Finish
 
-Report in a few lines: the mode (concierge, or regular if asked), where the work is (the `forty/setup` branch and worktree
+Report in a few lines: the mode (conversational UI, or classic if asked), where the work is (the `forty/setup` branch and worktree
 path, and how to merge it), the live link, the components published and
 which store components draw them, what you assumed (the consent source above
 all), and the commands they use from here — `npx forty dev` (every save updates

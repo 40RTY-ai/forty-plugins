@@ -13,7 +13,7 @@ You are adding five things to the store's repo and publishing one:
 | `app/forty/catalog.ts` | what the agent may compose — data only |
 | `app/forty/catalogs/<type>.md` | each type described to the agent |
 | `app/forty/components.tsx` | the store's components drawing each type |
-| `app/forty/Shell.tsx` | the page: the canvas, and the AMS shell in the store's design (`concierge.md` by default, `island.md` for regular) |
+| `app/forty/Shell.tsx` | the page: the canvas, and the AMS shell in the store's design (`conversational.md` by default, `classic.md` if asked) |
 | `app/forty/route.tsx` | the agentic page's route module: mounts `<Spacefront>` with the above |
 | `app/forty/routes.ts` + one line in `app/routes.ts` | with `FORTY_AGENTIC=1` the app's `/` renders `forty/route.tsx` |
 
@@ -64,7 +64,7 @@ Before writing anything, establish:
 - the path alias (`~/…`), and where shared components live;
 - the components to reuse, and the exact props each takes;
 - its **design system** — colours, type, radius, buttons, inputs, what is pinned
-  to the viewport (`island.md` says what to collect);
+  to the viewport (`classic.md` says what to collect);
 - keyboard shortcuts the store binds to single keys (a field inside the
   agentic webpage must not trigger them);
 - the store binding in `.env`: `PUBLIC_STORE_DOMAIN`, `PUBLIC_STOREFRONT_API_TOKEN`,
@@ -152,10 +152,10 @@ store form that reads `options[0]` must still get one (key it by the variant tit
 
 ### 6. Shell and agentic page
 
-Build the shell in concierge mode as `concierge.md` describes (the
+Build the shell as a conversational UI as `conversational.md` describes (the
 conversation page, the conversation blocks drawn with the store's product card,
 `brand.ts` + `prompts/composition.md`) — or, only if the developer asked for
-regular, as `island.md` describes, over `<SpacefrontCanvas />`. Write its copy
+classic, as `classic.md` describes, over `<SpacefrontCanvas />`. Write its copy
 for this store.
 
 Put the page in `app/forty/route.tsx` (`hydrogen-example/route.tsx`): a route

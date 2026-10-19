@@ -1,7 +1,7 @@
 {
   "name": "forty",
   "description": "Set up a 40rty spacefront in your repository: self-hosted in your own app, or hosted by 40rty.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": {
     "name": "40rty"
   },
