@@ -9,22 +9,23 @@ design, while the app on 40rty is identical to it.
 ## New project
 
 ```
-npx --package @40rty/ams-cli forty create <directory>
+npx --package @40rty/ams-cli@latest forty create <directory>
 cd <directory> && npm install
 npx forty init [--space <slug> | --create <slug>]
-npx forty connect
+npx forty connect --from <the store's live URL>
 npm run dev
 ```
 
-`forty create` writes a starter: blocks for the types a store needs
-(`productGrid`, `collectionList`, …), a component for each, a shell and a
-Tailwind build. `forty init` signs in and writes `forty.config.json` for the
+`forty create` writes a conversational UI starter: blocks for the types a store
+needs (`productGrid`, `collectionList`, `hero`) beside the conversation blocks, a
+component for each, the conversation-page shell (with its scroller), the store
+tile, `src/brand.ts`, `prompts/composition.md` and a Tailwind build. `forty init` signs in and writes `forty.config.json` for the
 space (create it with `--create` if the developer named a new one).
 
-`forty connect` attaches the store: put `PUBLIC_STORE_DOMAIN`,
-`PUBLIC_STOREFRONT_API_TOKEN` (and `SHOP_ID` if known) in the package's `.env`
-first — a real store with a Storefront token; the agent cannot search without
-one. `npm run dev` then stores every save as a draft and prints the **preview
+`forty connect --from <url>` attaches the store from its live page: the domain
+and the public Storefront token every visitor's browser already receives (a bot
+wall: pass a page the developer saved from their browser — see `SKILL.md`). It
+has to be a real, published store; the agent cannot search without one. `npm run dev` then stores every save as a draft and prints the **preview
 link**. Leave it running.
 
 ## Existing package
@@ -59,9 +60,12 @@ preview link, restyle the package from the store's own design:
 - **Components:** match the store's card (image ratio, corners, title case),
   price style, button (fill, radius, hover) and section headings in
   `src/blocks.tsx`; give the header the store's logo treatment.
-- **Shell:** keep the island's anatomy (`island.md`), in those tokens.
-- **Then** follow `components.md` (tier 1, then `comparisonTable` and
-  `productDetail`).
+- **Conversational UI (default):** the starter already is one. Restyle its
+  header, store tile and `--fourty-convo-*` tokens from the same reading, word
+  `prompts/composition.md` in the store's words (`conversational.md`), and keep
+  tier 1 from `components.md` in the store's look. Keep `scrollRef` on the shell.
+- **Classic (only on request):** replace the shell as `classic.md` describes,
+  then follow `components.md` (tier 1, then `comparisonTable` and `productDetail`).
 
 **Product pages from the store's own theme (Shopify).** When the store has
 granted 40rty's Shopify app the optional `read_themes` scope, don't rebuild the

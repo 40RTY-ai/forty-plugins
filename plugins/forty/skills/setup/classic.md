@@ -1,4 +1,8 @@
-# The shell: island, side panel and presence, in the store's design
+# Classic: the store's page, reshaped, with the chat side panel
+
+Only when the developer asks for classic. The store's own page stays the page;
+the agent reshapes its canvas, and the conversation lives in the chat side panel
+beside it, asked from the island (the floating prompt box).
 
 An agentic webpage's shell has three pieces, all from `@40rty/ams-ui`, all
 themed by the same `--fourty-*` tokens mapped once from the store's design:
@@ -84,6 +88,11 @@ or colours the store does not use.
 
 ## Around it
 
+- **Hosted package (no app):** 40rty hosts the page in a frame that does not
+  scroll, so the shell must own the scroller — a root like
+  `<div ref={useScrollContainerRef()} className="h-full overflow-y-auto">`, or
+  `ShellScaffold scrollRef={useScrollContainerRef()}`. A `min-h-screen` root that
+  expects the document to scroll cannot scroll at all.
 - `<SpacefrontCanvas />` fills the page's main column, with bottom padding equal
   to the island's height so the last row is never hidden behind it.
 - The store's header, footer and cart stay as they are. The cart is the store's:
