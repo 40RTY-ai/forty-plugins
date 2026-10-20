@@ -15,7 +15,7 @@ fills the store's own cart.
 
 ## 0. Who is this for
 
-The CLI is `@40rty/ams-cli` **0.5.8 or later** (`--from`, `whoami`, the
+The CLI is `@40rty/ams-cli` **0.5.10 or later** (`--from`, `whoami`, the
 conversational starter). First run:
 
 ```
