@@ -67,6 +67,16 @@ preview link, restyle the package from the store's own design:
 - **Classic (only on request):** replace the shell as `classic.md` describes,
   then follow `components.md` (tier 1, then `comparisonTable` and `productDetail`).
 
+**Product pages from the store's own theme (Shopify).** When the store has
+granted 40rty's Shopify app the optional `read_themes` scope, don't rebuild the
+product page by eye: add `"theme": { "designs": "./theme.designs.mjs", "out":
+"src/theme/pdp-theme.json" }` to `forty.config.json` and run `npx forty theme
+sync`. It writes every product template's sections in the store's order (and
+what its apps add — reels, photo walls, sibling tiles, badges); render that file
+in `productDetail`. Anything the sync cannot name fails it, naming it — describe
+it in `theme.designs.mjs`, never paste the store's raw HTML. Re-run it whenever
+the merchant edits a template, then release.
+
 Compare the preview with the store's site side by side before handing it over.
 
 ## Check
@@ -78,3 +88,14 @@ npx forty doctor
 Then hand over the preview link. Release only when the developer asks:
 `npm run release` (or `npx forty publish`) — the space's public page then
 renders the package for every visitor.
+
+## Release
+
+- **Draft, then release.** `npx forty dev --once` puts the package on the
+  space as a draft (a preview link, visitors unaffected); check it there first.
+- **Bump `version` in `package.json` every release.** The platform refuses a
+  release whose version is not higher than every one already released
+  (`409 … not higher than …`) — a refused release changes nothing for visitors.
+- **Then check the live page itself**, not the draft: open the space's public
+  link (no `?preview=`) and confirm the change is there. A release job that
+  "succeeded" with an unbumped version did not release.
